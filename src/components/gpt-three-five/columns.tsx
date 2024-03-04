@@ -1,25 +1,25 @@
 'use client'
 
-import { GptThreeFivePrice } from '@/data/gpt-3.5'
-
-import { ColumnDef } from '@tanstack/react-table'
-
 import { ArrowUpDownIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { GptThreeFivePrice } from '@/data/gpt-3.5'
+import { ExtendedColumnDef } from '@/types'
 
-export const gptThreeFiveColumns: ColumnDef<GptThreeFivePrice>[] = [
+export const gptThreeFiveColumns: ExtendedColumnDef<GptThreeFivePrice>[] = [
   {
     header: 'ID',
     accessorKey: 'id',
+    displayName: 'ID',
   },
   {
     header: 'Tokens Per execution',
     accessorKey: 'tokens_per_execution',
+    displayName: 'Tokens per execution',
   },
   {
     header: 'Words per execution',
     accessorKey: 'words_per_execution',
+    displayName: 'Words per execution',
   },
   {
     header: ({ column }) => {
@@ -36,5 +36,6 @@ export const gptThreeFiveColumns: ColumnDef<GptThreeFivePrice>[] = [
       )
     },
     accessorKey: 'price_for_1_execution',
+    displayName: 'Price for 1 execution',
   },
 ]

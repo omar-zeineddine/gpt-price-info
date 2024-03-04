@@ -67,6 +67,10 @@ export function GptThreeFiveDataTable<TData, TValue>({
               .getAllColumns()
               .filter((column) => column.getCanHide())
               .map((column) => {
+                const displayName =
+                  'displayName' in column.columnDef
+                    ? column.columnDef.displayName
+                    : column.columnDef.header
                 return (
                   <DropdownMenuCheckboxItem
                     key={column.id}
@@ -76,7 +80,9 @@ export function GptThreeFiveDataTable<TData, TValue>({
                       column.toggleVisibility(!!value)
                     }
                   >
-                    {column.id}
+                    {typeof displayName === 'function'
+                      ? displayName({ column }).props.children
+                      : displayName}
                   </DropdownMenuCheckboxItem>
                 )
               })}

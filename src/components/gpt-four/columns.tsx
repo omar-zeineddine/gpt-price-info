@@ -1,25 +1,25 @@
 'use client'
 
-import { GptFourPrice, gptFour } from '@/data/gpt-4'
-
-import { ColumnDef } from '@tanstack/react-table'
-
 import { ArrowUpDownIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
+import { GptFourPrice } from '@/data/gpt-4'
+import { ExtendedColumnDef } from '@/types'
 
-export const gptFourColumns: ColumnDef<GptFourPrice>[] = [
+export const gptFourColumns: ExtendedColumnDef<GptFourPrice>[] = [
   {
     header: 'ID',
     accessorKey: 'id',
+    displayName: 'ID',
   },
   {
     header: 'Tokens Per execution',
     accessorKey: 'tokens_per_execution',
+    displayName: 'Tokens per execution',
   },
   {
     header: 'Words per execution',
     accessorKey: 'words_per_execution',
+    displayName: 'Words per execution',
   },
   {
     header: ({ column }) => {
@@ -36,5 +36,6 @@ export const gptFourColumns: ColumnDef<GptFourPrice>[] = [
       )
     },
     accessorKey: 'price_for_1_execution',
+    displayName: 'Price for 1 execution',
   },
 ]
