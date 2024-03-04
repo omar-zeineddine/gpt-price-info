@@ -65,7 +65,7 @@ export function GptThreeFiveDataTable<TData, TValue>({
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()
-              .filter((column) => column.getCanHide())
+              .filter((column) => column.id !== 'dynamicPrice')
               .map((column) => {
                 const displayName =
                   'displayName' in column.columnDef
@@ -100,9 +100,9 @@ export function GptThreeFiveDataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}
