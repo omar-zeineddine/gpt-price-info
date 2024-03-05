@@ -1,9 +1,8 @@
 import React from 'react'
 
 import TableTabs from '@/components/tabs'
-import { gptThreeFive } from '@/data/gpt-3.5'
-import { GptThreeFiveDataTable } from '@/components/gpt-three-five/GptThreeFiveDataTable'
-import { gptThreeFiveColumns } from '@/components/gpt-three-five/columns'
+import Faq from '@/components/faq'
+import Footer from '@/components/footer'
 
 function Home() {
   return (
@@ -15,6 +14,8 @@ function Home() {
         </p>
       </div>
       <TableTabs />
+      <Faq />
+      <Footer />
     </div>
   )
 }

@@ -34,18 +34,23 @@ export function GptFourDataTable<TData, TValue>({
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
+  const [sliderValue, setSliderValue] = React.useState(100)
+
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    // use local sorting state
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
     state: {
       sorting,
       columnVisibility,
+    },
+    meta: {
+      sliderValue,
+      setSliderValue,
     },
   })
 
@@ -100,9 +105,9 @@ export function GptFourDataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}
