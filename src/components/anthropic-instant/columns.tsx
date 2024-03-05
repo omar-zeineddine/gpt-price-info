@@ -6,6 +6,7 @@ import { Slider } from '@/components/ui/slider'
 import { GptThreeFivePrice } from '@/data/gpt-3.5'
 import { ExtendedColumnDef, GptTableData } from '@/types'
 import { TableMeta } from '@tanstack/react-table'
+import { TooltipInfo } from '@/components/tooltip-info'
 
 type ExtendedTableMeta = TableMeta<GptTableData> & {
   sliderValue: number
@@ -48,35 +49,40 @@ export const anthropicInstantColumns: ExtendedColumnDef<GptThreeFivePrice>[] = [
   {
     id: 'dynamicPrice',
     header: ({ table }) => (
-      <div className="min-w-[150px]">
-        <p className="py-4">Price </p>
+      <div>
+        <div className="py-4 flex min-w-[310px] items-center">
+          <p>Anthropic price for</p>
+          <input
+            readOnly
+            className="w-[65px] py-1 mx-2 text-center border border-gray-300 rounded-sm"
+            value={(
+              table?.options.meta as ExtendedTableMeta
+            )?.sliderValue.toString()}
+          />
+          <p>executions</p>
+          <TooltipInfo />
+        </div>
         <Slider
-          className="pb-4"
+          className="pb-4 max-w-[290px]"
           min={0}
           max={1000000}
           step={1000}
           onValueChange={(value: number[]) => {
-            if ((table.options.meta as ExtendedTableMeta)?.setSliderValue) {
-              ; (table.options.meta as ExtendedTableMeta).setSliderValue(
+            if ((table?.options.meta as ExtendedTableMeta)?.setSliderValue) {
+              ;(table?.options.meta as ExtendedTableMeta).setSliderValue(
                 value[0]
               )
             }
           }}
         />
-        <div className="w-[80px] mx-auto">
-          <input
-            readOnly
-            className="w-[80px] py-1 mx-2 text-center border border-gray-300 rounded-sm"
-            value={(
-              table.options.meta as ExtendedTableMeta
-            )?.sliderValue.toString()}
-          />
-        </div>
       </div>
     ),
     cell: ({ row, table }) => {
-      const sliderValue = (table.options.meta as ExtendedTableMeta)?.sliderValue || 1
-      const basePrice = parseFloat(row.original.price_for_1_execution.replace('~$', ''))
+      const sliderValue =
+        (table.options.meta as ExtendedTableMeta)?.sliderValue || 1
+      const basePrice = parseFloat(
+        row.original.price_for_1_execution.replace('~$', '')
+      )
       const adjustedPrice = basePrice * sliderValue
       return <div>~${adjustedPrice.toFixed(2)}</div>
     },

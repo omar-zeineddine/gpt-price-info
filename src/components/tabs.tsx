@@ -46,6 +46,8 @@ const TableTabs = ({ className }: { className?: string }) => {
           />
           OpenAI gpt-4-32k
         </TabsTrigger>
+      </TabsList>
+      <TabsList className="mt-4">
         <TabsTrigger value="anthropic-1">
           <Image
             src="/anthropic.svg"
