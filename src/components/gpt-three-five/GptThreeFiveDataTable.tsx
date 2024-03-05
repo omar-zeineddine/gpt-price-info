@@ -34,6 +34,11 @@ export function GptThreeFiveDataTable<TData, TValue>({
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
+  const [sliderValue, setSliderValue] = React.useState(100)
+
+  const handleSliderChange = (value: number) => {
+    setSliderValue(value)
+  }
 
   const table = useReactTable({
     data,
@@ -46,6 +51,10 @@ export function GptThreeFiveDataTable<TData, TValue>({
     state: {
       sorting,
       columnVisibility,
+    },
+    meta: {
+      sliderValue,
+      setSliderValue,
     },
   })
 
@@ -100,9 +109,9 @@ export function GptThreeFiveDataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   )
                 })}

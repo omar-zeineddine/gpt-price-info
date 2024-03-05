@@ -39,30 +39,34 @@ export const gptThreeFiveColumns: ExtendedColumnDef<GptThreeFivePrice>[] = [
     accessorKey: 'price_for_1_execution',
     displayName: 'Price for 1 execution',
   },
-  // {
-  //   id: 'dynamicPrice',
-  //   header: ({ table }) => (
-  //     <div>
-  //       <p className="py-4">Price </p>
-  //       <Slider
-  //         className="pb-4"
-  //         min={0}
-  //         max={4000}
-  //         step={100}
-  //         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-  //           const value = Number(event.target.value)
-  //           const handleSliderChange = table.options.meta?.handleSliderChange
-  //           handleSliderChange?.(value)
-  //         }}
-  //       />
-  //       <input value={table.options.meta?.sliderValue} />
-  //     </div>
-  //   ),
-  //   cell: ({ row, table }) => {
-  //     const sliderValue = table.options.meta?.sliderValue || 1 // Default to 1 to avoid multiplication by 0
-  //     const basePrice = Number(row.original.price_for_1_execution)
-  //     const adjustedPrice = basePrice * (sliderValue / 100) // Adjust this formula as needed
-  //     return <div>${adjustedPrice.toFixed(2)}</div>
-  //   },
-  // },
+  {
+    id: 'dynamicPrice',
+    header: ({ table }) => (
+      <div className="min-w-[150px]">
+        <p className="py-4">Price </p>
+        <Slider
+          className="pb-4"
+          min={0}
+          max={4000}
+          step={100}
+          onValueChange={(value: number[]) => {
+            if (table.options.meta?.setSliderValue) {
+              table.options.meta.setSliderValue(value[0])
+            }
+          }}
+        />
+        <div className="w-[40px] mx-auto">
+          <input
+            className="w-[40px] py-1 mx-2 text-center border border-gray-300 rounded-sm"
+            value={table.options.meta?.sliderValue.toString()}
+          />
+        </div>
+      </div>
+    ),
+    cell: ({ row, table }) => {
+      const sliderValue = table.options.meta?.sliderValue || 1 // Default to 1 to avoid multiplication by 0
+      const adjustedPrice = sliderValue * (sliderValue / 100) // Adjust this formula as needed
+      return <div>${adjustedPrice.toFixed(2)}</div>
+    },
+  },
 ]
