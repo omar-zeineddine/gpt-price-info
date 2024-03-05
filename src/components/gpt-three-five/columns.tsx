@@ -4,7 +4,13 @@ import { ArrowUpDownIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
 import { GptThreeFivePrice } from '@/data/gpt-3.5'
-import { ExtendedColumnDef } from '@/types'
+import { ExtendedColumnDef, GptTableData } from '@/types'
+import { TableMeta } from '@tanstack/react-table'
+
+type ExtendedTableMeta = TableMeta<GptTableData> & {
+  sliderValue: number
+  setSliderValue: (value: number) => void
+}
 
 export const gptThreeFiveColumns: ExtendedColumnDef<GptThreeFivePrice>[] = [
   {
@@ -50,22 +56,27 @@ export const gptThreeFiveColumns: ExtendedColumnDef<GptThreeFivePrice>[] = [
           max={4000}
           step={100}
           onValueChange={(value: number[]) => {
-            if (table.options.meta?.setSliderValue) {
-              table.options.meta.setSliderValue(value[0])
+            if ((table.options.meta as ExtendedTableMeta)?.setSliderValue) {
+              ;(table.options.meta as ExtendedTableMeta).setSliderValue(
+                value[0]
+              )
             }
           }}
         />
         <div className="w-[40px] mx-auto">
           <input
             className="w-[40px] py-1 mx-2 text-center border border-gray-300 rounded-sm"
-            value={table.options.meta?.sliderValue.toString()}
+            value={(
+              table.options.meta as ExtendedTableMeta
+            )?.sliderValue.toString()}
           />
         </div>
       </div>
     ),
     cell: ({ row, table }) => {
-      const sliderValue = table.options.meta?.sliderValue || 1 // Default to 1 to avoid multiplication by 0
-      const adjustedPrice = sliderValue * (sliderValue / 100) // Adjust this formula as needed
+      const sliderValue =
+        (table.options.meta as ExtendedTableMeta)?.sliderValue || 1
+      const adjustedPrice = sliderValue * (sliderValue / 100)
       return <div>${adjustedPrice.toFixed(2)}</div>
     },
   },

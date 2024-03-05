@@ -25,7 +25,6 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { DataTableProps } from './data-table'
-import TableTabs from '../tabs'
 
 export function GptThreeFiveDataTable<TData, TValue>({
   columns,
