@@ -1,3 +1,25 @@
+# AI Models Price Tracker
+
+## Introduction
+
+Compare and track pricing of various AI models, including OpenAI GPT and Anthropic Claude APIs. Built with TypeScript, Next.js, and shadcn UI, and tanstack tables, it offers a sleek and user-friendly interface for users to estimate costs based on token usage or number of token executions.
+
+## Features
+
+- **Pricing Calculator:** Easily calculate costs for different AI models based on token count or execution number.
+- **API Model Coverage:** Includes pricing for models like OpenAI's GPT-3.5-Turbo, GPT-4-Turbo (beta), GPT-4-32k, and Anthropic's Instant-1 and Claude-2.
+- **FAQ Section:** Answers to common questions regarding tokens, executions, prompts, responses, billing limits, and monitoring API costs.
+
+## Tech Stack
+
+- **Next.js:** A React framework for building server-side rendering and static web applications.
+- **TypeScript:** A strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
+- **Shadcn UI:** A modern UI library for React, making it easy to build beautiful, responsive designs. [Learn more about Shadcn UI](https://ui.shadcn.com/).
+
+## Contributions
+
+This project is open source, and we welcome contributions from the community. Whether it's adding new features, fixing bugs, or improving documentation.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
