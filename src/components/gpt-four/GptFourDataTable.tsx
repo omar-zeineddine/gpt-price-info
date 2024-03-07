@@ -36,7 +36,6 @@ export function GptFourDataTable<TData, TValue>({
     React.useState<VisibilityState>({})
   const [sliderValue, setSliderValue] = React.useState(100)
 
-
   const table = useReactTable({
     data,
     columns,
@@ -70,7 +69,7 @@ export function GptFourDataTable<TData, TValue>({
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()
-              .filter((column) => column.getCanHide())
+              .filter((column) => column.id !== 'dynamicPrice')
               .map((column) => {
                 const displayName =
                   'displayName' in column.columnDef
@@ -105,9 +104,9 @@ export function GptFourDataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   )
                 })}
