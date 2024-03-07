@@ -1,6 +1,7 @@
 import React from 'react'
 
 import TableTabs from '@/components/tabs'
+import UserInput from '@/components/user-input'
 import Faq from '@/components/faq'
 import Footer from '@/components/footer'
 
@@ -17,6 +18,7 @@ function Home() {
         </p>
       </div>
       <TableTabs />
+      <UserInput />
       <Faq />
       <Footer />
     </div>
